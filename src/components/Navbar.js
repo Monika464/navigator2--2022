@@ -6,7 +6,7 @@ const Navbar = () =>{
              <h1>Geolocator</h1>
             <div className="links">
               
-                <a href="/">Navigator</a>
+                <a href="/">Home</a>
                 <a href="/weather">Weather</a>
                 <a href="/search">Search</a>
               
