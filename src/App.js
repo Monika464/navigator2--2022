@@ -3,28 +3,32 @@ import {BrowserRouter, Switch ,Route,Redirect} from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Home from './pages/Home'
-import Track from './components/Track'
+
 
 
 function App() {
+
+
+
   return (
     <div className="App">
-   
+ 
     
       <BrowserRouter>
-        <Navbar/>     
+        <Navbar/> 
+         
         <Switch>
           <Route exact path="/">
-             <Home/>
+             <Home/>         
           </Route>
           <Route path="/search"> 
           </Route>
            <Route path="/weather">       
-           </Route>                  
+           </Route>                      
        </Switch>
-  
+      
       </BrowserRouter>
-       <Track/>
+      
     </div>
   )
 }

@@ -1,16 +1,65 @@
-
+import {useState,useEffect,useCallback} from 'react'
+import useTrack from '../hooks/useTrack'
+import {CopyToClipboard} from 'react-copy-to-clipboard'
  
- export default function Home({lat,lon,isPending}) {
- console.log(lat,lon)
+ //export default function Home({lat,lon,id}) {
+export default function Home() {
+const {lat,lon,id} = useTrack()
+const [copied, setCopied] = useState(false);
+
+
+
+ const onClick = useCallback(({target: {innerText}}) => {
+    console.log(`Clicked on "${innerText}"!`);
+  }, [])
+  
+    const onCopy = useCallback(() => {
+    setCopied(true);
+  }, [])
+ 
+ 
+ console.log(lat,lon,id)
+ const [isPending,setIsPending]=useState(false)
+ 
+ const handleClickStop=()=>{
+ navigator.geolocation.clearWatch(id);
+ }
+ 
+
+ useEffect(() => {
+                
+       if(lat&&lon !=0){
+       setIsPending(false)
+       } 
+       else {
+       
+        setIsPending(true)
+       }
+    
+     },[lat,lon]) 
 
 return(
 <div>
-{!isPending&&
-<div>Latitude {lat}, Longitude {lon}</div>
-}
+
+
+{!isPending&&<div>Latitude,Longitude {lon},{lat}</div>}
 {isPending &&<p>Loading...</p>}
+ <p>
+        <CopyToClipboard
+          onCopy={onCopy}
+          options={{message: 'Copy'}}
+          text={[lon,lat]}>
+          
+         <span> <button onClick={onClick}>Copy coordinates of your current position</button></span>
+      </CopyToClipboard>
+        {copied ? <span style={{color: 'red'}}>Copied.</span> : null}
+      </p>
+      
+<button onClick={handleClickStop}>Zakoncz sledzenie</button> 
+
 
 </div>
 )
+
 
 }

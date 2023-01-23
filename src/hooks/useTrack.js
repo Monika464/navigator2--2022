@@ -1,9 +1,9 @@
 import {useState,useEffect,useCallback} from 'react'
-import Home from '../pages/Home'
+//import Home from '../pages/Home'
 
 export default function Track () {
 
-const [isPending,setIsPending]=useState(false)
+//const [isPending,setIsPending]=useState(false)
 const [lon,setLon] = useState (0)
 const [lat,setLat] = useState (0)
 const [accur, setAccure]= useState (0)
@@ -14,7 +14,7 @@ const [crd, setCrd] = useState(null)
 const fetchPosition = useCallback( async (success, error, options) =>{
  
  
-           setIsPending(true)
+           //setIsPending(true)
            let id = await navigator.geolocation.watchPosition(success, error, options);
                options = {
   		   enableHighAccuracy: true,
@@ -29,7 +29,7 @@ const fetchPosition = useCallback( async (success, error, options) =>{
 		  setLat(crd.latitude); 
 		   console.log(crd.accuracy.toFixed(0))	                     
                   setId(id);
-                 setIsPending(false)
+                 //setIsPending(false)
                   // localStorage.setItem('LonWatch', JSON.stringify(crd.longitude));
                   // localStorage.setItem('LatWatch', JSON.stringify(crd.latitude));
                  setCrd(pos.coords)
