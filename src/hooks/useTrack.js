@@ -6,7 +6,7 @@ export default function Track () {
 //const [isPending,setIsPending]=useState(false)
 const [lon,setLon] = useState (0)
 const [lat,setLat] = useState (0)
-const [accur, setAccure]= useState (0)
+const [accure, setAccure]= useState (0)
 const [id, setId] = useState (0)
 const [crd, setCrd] = useState(null)
 
@@ -27,7 +27,8 @@ const fetchPosition = useCallback( async (success, error, options) =>{
             	  const crd = pos.coords;
                   setLon(crd.longitude); 
 		  setLat(crd.latitude); 
-		   console.log("fetch",crd.accuracy.toFixed(0))	                     
+		  setAccure(Math.round(crd.accuracy));
+		  console.log("dokladnosc",Math.round(crd.accuracy))	                     
                   setId(id);
                  //setIsPending(false)
                   // localStorage.setItem('LonWatch', JSON.stringify(crd.longitude));
@@ -49,5 +50,5 @@ const fetchPosition = useCallback( async (success, error, options) =>{
      },[crd,fetchPosition])  
      
     
-  return {lon,lat,id}   
+  return {lon,lat,id,accure}   
 }

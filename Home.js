@@ -1,21 +1,17 @@
 import {useState,useEffect,useCallback} from 'react'
 import useTrack from '../hooks/useTrack'
 import useFetch from '../hooks/useFetch'
-import useMap from '../hooks/useMap'
 import {CopyToClipboard} from 'react-copy-to-clipboard'
  
  //export default function Home({lat,lon,id}) {
 export default function Home() {
 const [copied, setCopied] = useState(false);
-const {lat,lon,id,accure} = useTrack()
-const {urlMarkMap} = useMap()
 const [url,setUrl] = useState(null)
+const {lat,lon,id} = useTrack()
+const {data: yourLocation, error: adressError } = useFetch(url)
+//console.log(yourLocation)
 
-
-const {data: yourLocation, error: adressError} = useFetch(url)
-console.log(urlMarkMap)
-
-const myMapApiKey = "pk.4445013492f295d88e56ecea546a9304"; 
+const myMapApiKey = ""; 
 
 useEffect(()=>{
 if((lat && lon) != 0){  
@@ -27,8 +23,9 @@ setUrl(null)
 },[lat,lon])
 
 
+
 //console.log("TUTAJ",yourLocation,"idpending",adressIsPending,"blad:", adressError)
-//console.log("LAT LON",lat,lon)
+console.log("LAT LON",lat,lon)
 
  const onClick = useCallback(({target: {innerText}}) => {
     console.log(`Clicked on "${innerText}"!`);
@@ -63,7 +60,7 @@ return(
 <div>
 
 
-{!isPending&&<div>Latitude,Longitude {lon},{lat} <p>Accuracy {accure} meters</p></div>}
+{!isPending&&<div>Latitude,Longitude {lon},{lat}</div>}
 {isPending &&<p>Loading...</p>}
  <p>
         <CopyToClipboard
@@ -80,9 +77,8 @@ return(
 
 <h2>Adres twojej pozycji</h2>
 
- {yourLocation && <p>{yourLocation.address.road},{yourLocation.address.quarter},{yourLocation.address.postcode},  {yourLocation.address.city},{yourLocation.address.state},{yourLocation.address.administrative},{yourLocation.address.country_code} </p>}
+ {yourLocation && <p>{yourLocation.address.city},{yourLocation.address.state},{yourLocation.address.quarter},{yourLocation.address.road},{yourLocation.address.postcode},{yourLocation.address.state},{yourLocation.address.administrative},{yourLocation.address.country_code} </p>}
  
-<img src= {urlMarkMap}/>
 
 {adressError && <p>adressError</p>}
 
@@ -91,3 +87,4 @@ return(
 
 
 }
+
