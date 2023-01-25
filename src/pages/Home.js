@@ -7,6 +7,7 @@ import {CopyToClipboard} from 'react-copy-to-clipboard'
  //export default function Home({lat,lon,id}) {
 export default function Home() {
 const [copied, setCopied] = useState(false);
+const [currentCoords,setCurrentCoords] = useState ([]);
 const {lat,lon,id,accure} = useTrack()
 const {urlMarkMap} = useMap()
 const [url,setUrl] = useState(null)
@@ -26,7 +27,14 @@ setUrl(null)
 
 },[lat,lon])
 
+const handleSaveCoordToStorage=()=>{
+setCurrentCoords(currentCoords);
+currentCoords.push({lon: lon,lat: lat, id: Math.round(Math.random() * Date.now()/100000),date: new Date()})
 
+localStorage.setItem('currentCoordsStored', JSON.stringify(currentCoords));
+}
+
+console.log(JSON.parse(localStorage.getItem('currentCoordsStored')))
 //console.log("TUTAJ",yourLocation,"idpending",adressIsPending,"blad:", adressError)
 //console.log("LAT LON",lat,lon)
 
@@ -75,7 +83,7 @@ return(
       </CopyToClipboard>
         {copied ? <span style={{color: 'red'}}>Copied.</span> : null}
       </p>
-      
+  <p><button onClick={handleSaveCoordToStorage}>Save current coordinates to personal storage</button></p>     
 <button onClick={handleClickStop}>Zakoncz sledzenie</button> 
 
 <h2>Adres twojej pozycji</h2>
