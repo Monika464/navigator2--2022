@@ -2,19 +2,24 @@ import {useState,useEffect,useCallback} from 'react'
 import useTrack from '../hooks/useTrack'
 import useFetch from '../hooks/useFetch'
 import useMap from '../hooks/useMap'
+import useReadStorage from '../hooks/useReadStorage'
 import {CopyToClipboard} from 'react-copy-to-clipboard'
  
  //export default function Home({lat,lon,id}) {
 export default function Home() {
 const [copied, setCopied] = useState(false);
 const [currentCoords,setCurrentCoords] = useState ([]);
+const [url,setUrl] = useState(null)
 const {lat,lon,id,accure} = useTrack()
 const {urlMarkMap} = useMap()
-const [url,setUrl] = useState(null)
-
+const {fromStorage,fetchFromStorage} = useReadStorage()
+ const [storageButtonShow, setStorageButtonShow] = useState(false);
+ 
+useEffect(()=>{fetchFromStorage()},[])
+//console.log("home-fromsto",fromStorage)
 
 const {data: yourLocation, error: adressError} = useFetch(url)
-console.log(urlMarkMap)
+//console.log(urlMarkMap)
 
 const myMapApiKey = "pk.4445013492f295d88e56ecea546a9304"; 
 
@@ -34,7 +39,7 @@ currentCoords.push({lon: lon,lat: lat, id: Math.round(Math.random() * Date.now()
 localStorage.setItem('currentCoordsStored', JSON.stringify(currentCoords));
 }
 
-console.log(JSON.parse(localStorage.getItem('currentCoordsStored')))
+//console.log("ze storage",JSON.parse(localStorage.getItem('currentCoordsStored')))
 //console.log("TUTAJ",yourLocation,"idpending",adressIsPending,"blad:", adressError)
 //console.log("LAT LON",lat,lon)
 
@@ -54,6 +59,9 @@ console.log(JSON.parse(localStorage.getItem('currentCoordsStored')))
  navigator.geolocation.clearWatch(id);
  }
  
+ const handleClearStorage=()=>{
+ localStorage.clear();
+ }
 
  useEffect(() => {
                 
@@ -66,6 +74,11 @@ console.log(JSON.parse(localStorage.getItem('currentCoordsStored')))
        }
     
      },[lat,lon]) 
+     
+      const handleClickStorageBut = event => {
+    // 👇️ toggle visibility
+    setStorageButtonShow(current => !current);
+  };
 
 return(
 <div>
@@ -93,6 +106,23 @@ return(
 <img src= {urlMarkMap}/>
 
 {adressError && <p>adressError</p>}
+  <p><button onClick={handleClearStorage}>Clear Storage</button></p>  
+
+<button onClick={()=>{handleClickStorageBut()}}>Show/Hide Personal Storage</button>
+  
+          {/*<button onClick={()=>{handleClickDelEv(event.id)}}>Delete event</button>
+            <button onClick={()=>{handleClickLoadMapMarkers(item.id)}}>Load on map</button>*/}
+      
+  <div style={{display: storageButtonShow ? 'block' : 'none'}}>
+  <p>huuuuuuu</p>
+        { fromStorage.map((item, index)=>(
+     <div key={item.id}>
+      <h2>{index}</h2>
+      <h2>Longitude,Latitude{item.lon},{item.lat}, date{item.date} </h2>
+     </div>
+   ))}
+      </div> 
+  
 
 </div>
 )
