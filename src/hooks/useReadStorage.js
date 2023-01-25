@@ -12,10 +12,10 @@ const fetchFromStorage =  async () =>{
    	  await setFromStorage(dataStor)  	   
         } 
     
- 
+
 }
 
-
+ console.log("w storage",fromStorage)
 
 
 return {fetchFromStorage,fromStorage}

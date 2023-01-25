@@ -11,9 +11,17 @@ const [copied, setCopied] = useState(false);
 const [currentCoords,setCurrentCoords] = useState ([]);
 const [url,setUrl] = useState(null)
 const {lat,lon,id,accure} = useTrack()
-const {urlMarkMap} = useMap()
+const {urlMarkMap,handleClickLoadTargetMark,handleClickRemoveTargetMark } = useMap()
 const {fromStorage,fetchFromStorage} = useReadStorage()
  const [storageButtonShow, setStorageButtonShow] = useState(false);
+ 
+ 
+ //const handleClickLoadTargetMark =(e)=>{
+ //console.log(e.lon,e.lat)
+  //}
+  
+ 
+ 
  
 useEffect(()=>{fetchFromStorage()},[])
 //console.log("home-fromsto",fromStorage)
@@ -52,7 +60,7 @@ localStorage.setItem('currentCoordsStored', JSON.stringify(currentCoords));
   }, [])
  
  
- console.log(lat,lon,id)
+ //console.log(lat,lon,id)
  const [isPending,setIsPending]=useState(false)
  
  const handleClickStop=()=>{
@@ -114,11 +122,12 @@ return(
             <button onClick={()=>{handleClickLoadMapMarkers(item.id)}}>Load on map</button>*/}
       
   <div style={{display: storageButtonShow ? 'block' : 'none'}}>
-  <p>huuuuuuu</p>
         { fromStorage.map((item, index)=>(
      <div key={item.id}>
       <h2>{index}</h2>
       <h2>Longitude,Latitude{item.lon},{item.lat}, date{item.date} </h2>
+      <button onClick={(e)=>{handleClickLoadTargetMark(item)}}>Load on map</button>
+      <button onClick={handleClickRemoveTargetMark}>Remove from map</button>
      </div>
    ))}
       </div> 
