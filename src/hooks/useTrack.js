@@ -7,7 +7,7 @@ export default function Track () {
 const [lon,setLon] = useState (0)
 const [lat,setLat] = useState (0)
 const [accure, setAccure]= useState (0)
-const [id, setId] = useState (0)
+let [id, setId] = useState (0)
 const [crd, setCrd] = useState(null)
 
 
@@ -15,7 +15,8 @@ const fetchPosition = useCallback( async (success, error, options) =>{
  
  
            //setIsPending(true)
-           let id = await navigator.geolocation.watchPosition(success, error, options);
+          id = await navigator.geolocation.watchPosition(success, error, options);
+          
                options = {
   		   enableHighAccuracy: true,
   		   timeout: Infinity,
@@ -35,6 +36,8 @@ const fetchPosition = useCallback( async (success, error, options) =>{
                   // localStorage.setItem('LatWatch', JSON.stringify(crd.latitude));
                  setCrd(pos.coords)
                   }
+                  
+                  console.log("id",id)
                   
             function error(err) {
                   console.error(`ERROR(${err.code}): ${err.message}`);

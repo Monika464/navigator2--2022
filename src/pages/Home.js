@@ -4,27 +4,37 @@ import useFetch from '../hooks/useFetch'
 import useMap from '../hooks/useMap'
 import useReadStorage from '../hooks/useReadStorage'
 import {CopyToClipboard} from 'react-copy-to-clipboard'
- 
+  
+  
  //export default function Home({lat,lon,id}) {
 export default function Home() {
+//localStorage.clear();
+
 const [copied, setCopied] = useState(false);
-const [currentCoords,setCurrentCoords] = useState ([]);
+const [storageButtonShow, setStorageButtonShow] = useState(false);
+const [currentCoords,setCurrentCoords] = useState([]);
+
 const [url,setUrl] = useState(null)
 const {lat,lon,id,accure} = useTrack()
 const {urlMarkMap,handleClickLoadTargetMark,handleClickRemoveTargetMark } = useMap()
 const {fromStorage,fetchFromStorage} = useReadStorage()
- const [storageButtonShow, setStorageButtonShow] = useState(false);
- 
+//const{refreshPage} = useRefresh()
+
+ const handleSaveCoordToStorage=()=>{
+//tu cos przestawilam
+currentCoords.push({lon: lon,lat: lat, id: Math.round(Math.random() * Date.now()/100000),date: new Date()})
+setCurrentCoords(currentCoords);
+localStorage.setItem('currentCoordsStored', JSON.stringify(currentCoords));
+}
  
  //const handleClickLoadTargetMark =(e)=>{
  //console.log(e.lon,e.lat)
   //}
   
+ console.log("currentCoords",currentCoords)
  
  
- 
-useEffect(()=>{fetchFromStorage()},[])
-//console.log("home-fromsto",fromStorage)
+
 
 const {data: yourLocation, error: adressError} = useFetch(url)
 //console.log(urlMarkMap)
@@ -32,7 +42,7 @@ const {data: yourLocation, error: adressError} = useFetch(url)
 const myMapApiKey = "pk.4445013492f295d88e56ecea546a9304"; 
 
 useEffect(()=>{
-if((lat && lon) != 0){  
+if((lat && lon) !== 0){  
     setUrl (`https://eu1.locationiq.com/v1/reverse?key=${myMapApiKey}&lat=${lat}&lon=${lon}         &format=json&addressdetails=1&showdistance=1`)
 } else{
 setUrl(null)
@@ -40,16 +50,11 @@ setUrl(null)
 
 },[lat,lon])
 
-const handleSaveCoordToStorage=()=>{
-setCurrentCoords(currentCoords);
-currentCoords.push({lon: lon,lat: lat, id: Math.round(Math.random() * Date.now()/100000),date: new Date()})
 
-localStorage.setItem('currentCoordsStored', JSON.stringify(currentCoords));
-}
 
-//console.log("ze storage",JSON.parse(localStorage.getItem('currentCoordsStored')))
-//console.log("TUTAJ",yourLocation,"idpending",adressIsPending,"blad:", adressError)
-//console.log("LAT LON",lat,lon)
+useEffect(()=>{fetchFromStorage()},[currentCoords,fetchFromStorage])
+
+
 
  const onClick = useCallback(({target: {innerText}}) => {
     console.log(`Clicked on "${innerText}"!`);
@@ -73,7 +78,7 @@ localStorage.setItem('currentCoordsStored', JSON.stringify(currentCoords));
 
  useEffect(() => {
                 
-       if(lat&&lon !=0){
+       if(lat&&lon !==0){
        setIsPending(false)
        } 
        else {
@@ -111,7 +116,7 @@ return(
 
  {yourLocation && <p>{yourLocation.address.road},{yourLocation.address.quarter},{yourLocation.address.postcode},  {yourLocation.address.city},{yourLocation.address.state},{yourLocation.address.administrative},{yourLocation.address.country_code} </p>}
  
-<img src= {urlMarkMap}/>
+<img src= {urlMarkMap} alt="map"/>
 
 {adressError && <p>adressError</p>}
   <p><button onClick={handleClearStorage}>Clear Storage</button></p>  
@@ -122,15 +127,16 @@ return(
             <button onClick={()=>{handleClickLoadMapMarkers(item.id)}}>Load on map</button>*/}
       
   <div style={{display: storageButtonShow ? 'block' : 'none'}}>
-        { fromStorage.map((item, index)=>(
-     <div key={item.id}>
-      <h2>{index}</h2>
-      <h2>Longitude,Latitude{item.lon},{item.lat}, date{item.date} </h2>
-      <button onClick={(e)=>{handleClickLoadTargetMark(item)}}>Load on map</button>
-      <button onClick={handleClickRemoveTargetMark}>Remove from map</button>
-     </div>
-   ))}
-      </div> 
+  
+      {fromStorage && fromStorage.map((item, index)=>(
+        <div key={item.id}>
+         <h2>{index}</h2>
+         <h2>Longitude,Latitude{item.lon},{item.lat}, date{item.date} </h2>
+         <button onClick={(e)=>{handleClickLoadTargetMark(item)}}>Load on map</button>
+         <button onClick={handleClickRemoveTargetMark}>Remove from map</button>
+        </div>
+      ))}
+  </div> 
   
 
 </div>
