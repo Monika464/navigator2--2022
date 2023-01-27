@@ -15,6 +15,7 @@ const fetchPosition = useCallback( async (success, error, options) =>{
  
  
            //setIsPending(true)
+         //id = await navigator.geolocation.watchPosition(success, error, options);
           id = await navigator.geolocation.watchPosition(success, error, options);
           
                options = {
