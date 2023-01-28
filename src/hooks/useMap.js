@@ -10,7 +10,7 @@ const [latFrSto,setLatFrSto] = useState(lat)
 
 console.log("ii",lonFrSto,latFrSto)
 
-     
+    //fetchPosition() 
 
 
 const myMapApiKey = "pk.4445013492f295d88e56ecea546a9304"; 

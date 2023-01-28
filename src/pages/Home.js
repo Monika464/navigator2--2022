@@ -13,10 +13,20 @@ export default function Home() {
 const [copied, setCopied] = useState(false);
 const [storageButtonShow, setStorageButtonShow] = useState(false);
 const [currentCoords,setCurrentCoords] = useState([]);
+const [wachingPosButOn,setWachingPosButOn] = useState(false);
 
 const [url,setUrl] = useState(null)
-const {lat,lon,id,accure} = useTrack()
+
+//const {lat,lon,id,accure,handleButWatchPos} = useTrack()
+const {coords,lat,lon,id,accure,fetchPosition} = useTrack()
+
+
+//tu szuka po wczytaniu a ma po kliknieciu
+
 const {urlMarkMap,handleClickLoadTargetMark,handleClickRemoveTargetMark } = useMap()
+        
+
+
 const {fromStorage,fetchFromStorage} = useReadStorage()
 //const{refreshPage} = useRefresh()
 
@@ -33,6 +43,8 @@ localStorage.setItem('currentCoordsStored', JSON.stringify(currentCoords));
   
  console.log("currentCoords",currentCoords)
  
+  console.log("coords",coords)
+ 
  
 
 
@@ -41,18 +53,22 @@ const {data: yourLocation, error: adressError} = useFetch(url)
 
 const myMapApiKey = "pk.4445013492f295d88e56ecea546a9304"; 
 
+
 useEffect(()=>{
-if((lat && lon) !== 0){  
+
+if(wachingPosButOn){
+  if((lat && lon) !== 0){  
     setUrl (`https://eu1.locationiq.com/v1/reverse?key=${myMapApiKey}&lat=${lat}&lon=${lon}         &format=json&addressdetails=1&showdistance=1`)
-} else{
-setUrl(null)
+  } else{
+  setUrl(null)
+  }
 }
-
-},[lat,lon])
-
+},[lat,lon,wachingPosButOn])
 
 
-useEffect(()=>{fetchFromStorage()},[currentCoords,fetchFromStorage])
+
+//useEffect(()=>{fetchFromStorage()},[currentCoords,fetchFromStorage])
+
 
 
 
@@ -70,11 +86,13 @@ useEffect(()=>{fetchFromStorage()},[currentCoords,fetchFromStorage])
  
  const handleClickStop=()=>{
  navigator.geolocation.clearWatch(id);
+ console.log("watching position stopped")
  }
  
  const handleClearStorage=()=>{
  localStorage.clear();
  }
+
 
  useEffect(() => {
                 
@@ -90,6 +108,7 @@ useEffect(()=>{fetchFromStorage()},[currentCoords,fetchFromStorage])
      
       const handleClickStorageBut = event => {
     // 👇️ toggle visibility
+    fetchFromStorage();
     setStorageButtonShow(current => !current);
   };
 
@@ -112,11 +131,16 @@ return(
   <p><button onClick={handleSaveCoordToStorage}>Save current coordinates to personal storage</button></p>     
 <button onClick={handleClickStop}>Zakoncz sledzenie</button> 
 
+{/*sledzenie*/}
+  <span> <button onClick={()=>{
+  setWachingPosButOn(true)
+  fetchPosition()}}>Start watching of your position</button></span>
+
 <h2>Adres twojej pozycji</h2>
 
  {yourLocation && <p>{yourLocation.address.road},{yourLocation.address.quarter},{yourLocation.address.postcode},  {yourLocation.address.city},{yourLocation.address.state},{yourLocation.address.administrative},{yourLocation.address.country_code} </p>}
  
-<img src= {urlMarkMap} alt="map"/>
+ <img src= {urlMarkMap} alt="map"/>
 
 {adressError && <p>adressError</p>}
   <p><button onClick={handleClearStorage}>Clear Storage</button></p>  
