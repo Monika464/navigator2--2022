@@ -23,7 +23,7 @@ const {coords,lat,lon,id,accure,fetchPosition} = useTrack()
 
 //tu szuka po wczytaniu a ma po kliknieciu
 
-const {urlMarkMap,handleClickLoadTargetMark,handleClickRemoveTargetMark } = useMap()
+const {urlMarkMap,handleClickLoadTargetMark,handleClickRemoveTargetMark,handleClickWatchPosition } = useMap()
         
 
 
@@ -134,7 +134,8 @@ return(
 {/*sledzenie*/}
   <span> <button onClick={()=>{
   setWachingPosButOn(true)
-  fetchPosition()}}>Start watching of your position</button></span>
+  fetchPosition()
+  handleClickWatchPosition()}}>Start watching of your position</button></span>
 
 <h2>Adres twojej pozycji</h2>
 

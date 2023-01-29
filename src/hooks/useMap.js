@@ -1,19 +1,25 @@
-import {useState,useEffect,useCallback} from 'react'
+import {useState,useEffect} from 'react'
 import useTrack from './useTrack'
 
 
-export default function Map () {
+export default function useMap () {
 const [urlMarkMap,setUrlMarkMap] = useState(null)
-const {lat,lon} = useTrack()
+const {lat,lon,fetchPosition} = useTrack()
 const [lonFrSto,setLonFrSto] = useState(lon)
 const [latFrSto,setLatFrSto] = useState(lat)
 
 console.log("ii",lonFrSto,latFrSto)
+console.log("uuuu",lon,lat)
 
     //fetchPosition() 
 
 
 const myMapApiKey = "pk.4445013492f295d88e56ecea546a9304"; 
+
+const handleClickWatchPosition =()=>{
+fetchPosition();
+console.log("USEMAP",lat,lon);
+}
 
 
 const handleClickLoadTargetMark =(e)=>{
@@ -43,6 +49,6 @@ useEffect(()=>{
 },[lat,lon,latFrSto,lonFrSto])
 
 
-return {urlMarkMap,handleClickLoadTargetMark,handleClickRemoveTargetMark }
+return {urlMarkMap,handleClickLoadTargetMark,handleClickRemoveTargetMark,handleClickWatchPosition }
 
 }
