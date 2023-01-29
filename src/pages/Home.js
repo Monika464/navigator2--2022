@@ -63,6 +63,11 @@ if(wachingPosButOn){
   setUrl(null)
   }
 }
+else {
+console.log("Włacz sledzenie")
+}
+
+
 },[lat,lon,wachingPosButOn])
 
 
@@ -95,16 +100,19 @@ if(wachingPosButOn){
 
 
  useEffect(() => {
+ 
+       if(setWachingPosButOn) {
                 
-       if(lat&&lon !==0){
-       setIsPending(false)
-       } 
-       else {
-       
-        setIsPending(true)
-       }
-    
+                if(lat&&lon !==0){
+                  setIsPending(false)
+                } 
+                else {
+              setIsPending(true)
+              }
+          }
      },[lat,lon]) 
+    
+
      
       const handleClickStorageBut = event => {
     // 👇️ toggle visibility
@@ -115,9 +123,10 @@ if(wachingPosButOn){
 return(
 <div>
 
+{!wachingPosButOn && <div>Wlacz sledzenie</div>}
 
-{!isPending&&<div>Latitude,Longitude {lon},{lat} <p>Accuracy {accure} meters</p></div>}
-{isPending &&<p>Loading...</p>}
+{!isPending&&  <div>Latitude,Longitude {lon},{lat} <p>Accuracy {accure} meters</p></div>}
+{isPending && wachingPosButOn && <p>Loading...</p>}
  <p>
         <CopyToClipboard
           onCopy={onCopy}
