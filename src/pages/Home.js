@@ -3,6 +3,7 @@ import useTrack from '../hooks/useTrack'
 import useFetch from '../hooks/useFetch'
 import useMap from '../hooks/useMap'
 import useReadStorage from '../hooks/useReadStorage'
+import CoordsForm from '../components/CoordsForm';
 import {CopyToClipboard} from 'react-copy-to-clipboard'
   
   
@@ -18,17 +19,12 @@ const [wachingPosButOn,setWachingPosButOn] = useState(false);
 const [url,setUrl] = useState(null)
 
 //const {lat,lon,id,accure,handleButWatchPos} = useTrack()
-const {coords,lat,lon,id,accure,fetchPosition} = useTrack()
-
-
-//tu szuka po wczytaniu a ma po kliknieciu
-
-const {urlMarkMap,handleClickLoadTargetMark,handleClickRemoveTargetMark,handleClickWatchPosition } = useMap()
-        
-
-
+const {lat,lon,id,accure,fetchPosition} = useTrack()
+const {urlMarkMap,handleClickLoadTargetMark,handleClickRemoveTargetMark,loadMap} = useMap()
 const {fromStorage,fetchFromStorage} = useReadStorage()
 //const{refreshPage} = useRefresh()
+
+
 
  const handleSaveCoordToStorage=()=>{
 //tu cos przestawilam
@@ -43,11 +39,8 @@ localStorage.setItem('currentCoordsStored', JSON.stringify(currentCoords));
   
  console.log("currentCoords",currentCoords)
  
-  console.log("coords",coords)
+  //console.log("coords",coords)
  
- 
-
-
 const {data: yourLocation, error: adressError} = useFetch(url)
 //console.log(urlMarkMap)
 
@@ -59,6 +52,7 @@ useEffect(()=>{
 if(wachingPosButOn){
   if((lat && lon) !== 0){  
     setUrl (`https://eu1.locationiq.com/v1/reverse?key=${myMapApiKey}&lat=${lat}&lon=${lon}         &format=json&addressdetails=1&showdistance=1`)
+      loadMap(lat,lon);
   } else{
   setUrl(null)
   }
@@ -68,7 +62,7 @@ console.log("Włacz sledzenie")
 }
 
 
-},[lat,lon,wachingPosButOn])
+},[lat,lon,wachingPosButOn,loadMap])
 
 
 
@@ -125,6 +119,7 @@ return(
 
 {!wachingPosButOn && <div>Wlacz sledzenie</div>}
 
+{/*geocoords*/}
 {!isPending&&  <div>Latitude,Longitude {lon},{lat} <p>Accuracy {accure} meters</p></div>}
 {isPending && wachingPosButOn && <p>Loading...</p>}
  <p>
@@ -143,12 +138,21 @@ return(
 {/*sledzenie*/}
   <span> <button onClick={()=>{
   setWachingPosButOn(true)
-  fetchPosition()
-  handleClickWatchPosition()}}>Start watching of your position</button></span>
+  fetchPosition();
+
+  //handleClickWatchPosition()
+  }}>Start watching of your position</button></span>
+  
+   <div>
+ <br></br>
+ <br></br>
+   <CoordsForm/>
+   <br></br><br></br>
+ </div>
 
 <h2>Adres twojej pozycji</h2>
 
- {yourLocation && <p>{yourLocation.address.road},{yourLocation.address.quarter},{yourLocation.address.postcode},  {yourLocation.address.city},{yourLocation.address.state},{yourLocation.address.administrative},{yourLocation.address.country_code} </p>}
+ {yourLocation && <p>{yourLocation.address.road},{yourLocation.address.quarter},{yourLocation.address.postcode},{yourLocation.address.city},{yourLocation.address.state},{yourLocation.address.administrative},{yourLocation.address.country_code} </p>}
  
  <img src= {urlMarkMap} alt="map"/>
 
