@@ -58,15 +58,19 @@ if((lonForm&& latForm)!==0 && (lon&& lat)!==0){
    }
 }
 */
-
+/*
 const sendFormToMap =()=>{ 
    	if((lonForm&& latForm)!==0 && (lon&& lat)!==0){
    	setLatFrSto(latForm);
    	setLonFrSto(lonForm);
     	
    	}}
-  
+  */
 
+const formToMap =(latf,lonf)=>{
+setLatFrSto(latf);
+setLonFrSto(lonf);
+}
 
 const loadMap =(latx,lonx)=>{
 
@@ -81,6 +85,6 @@ const loadMap =(latx,lonx)=>{
 }
 
 
-return {urlMarkMap,handleClickLoadTargetMark,handleClickRemoveTargetMark,sendFormToMap,loadMap,setSendToMapButOn}
+return {urlMarkMap,handleClickLoadTargetMark,handleClickRemoveTargetMark,loadMap,setSendToMapButOn,formToMap}
 
 }

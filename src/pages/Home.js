@@ -3,10 +3,13 @@ import useTrack from '../hooks/useTrack'
 import useFetch from '../hooks/useFetch'
 import useMap from '../hooks/useMap'
 import useReadStorage from '../hooks/useReadStorage'
-import CoordsForm from '../components/CoordsForm';
+//import CoordsForm from '../components/CoordsForm';
 import {CopyToClipboard} from 'react-copy-to-clipboard'
-  
-  
+ 
+import useRefresh  from '../hooks/useRefresh'
+import blueIcon from '../images/blueIcon.png'
+//import {useReverseGeocoding} from './hooks/useReverseGeocoding' 
+   
  //export default function Home({lat,lon,id}) {
 export default function Home() {
 //localStorage.clear();
@@ -15,16 +18,20 @@ const [copied, setCopied] = useState(false);
 const [storageButtonShow, setStorageButtonShow] = useState(false);
 const [currentCoords,setCurrentCoords] = useState([]);
 const [wachingPosButOn,setWachingPosButOn] = useState(false);
-
+const [coordsFromForm,setCoordsFromForm] = useState('')
 const [url,setUrl] = useState(null)
+const[lonForm, setLonForm] = useState(null)
+const[latForm, setLatForm] = useState(null)
 
 //const {lat,lon,id,accure,handleButWatchPos} = useTrack()
 const {lat,lon,id,accure,fetchPosition} = useTrack()
-const {urlMarkMap,handleClickLoadTargetMark,handleClickRemoveTargetMark,loadMap} = useMap()
+const {urlMarkMap,handleClickLoadTargetMark,handleClickRemoveTargetMark,loadMap,setSendToMapButOn,formToMap} = useMap()
 const {fromStorage,fetchFromStorage} = useReadStorage()
+ const {refreshPage} = useRefresh()
+
 //const{refreshPage} = useRefresh()
 
-
+console.log("cords z formularza",coordsFromForm);
 
  const handleSaveCoordToStorage=()=>{
 //tu cos przestawilam
@@ -113,6 +120,35 @@ console.log("Włacz sledzenie")
     fetchFromStorage();
     setStorageButtonShow(current => !current);
   };
+  
+  
+
+
+//console.log("DATYA",data)
+
+     const handleSubmitForm =(e) =>{
+          e.preventDefault();
+         // setCoordsFromForm(coordsFromForm);
+           console.log("coordsFor-hoe",coordsFromForm.split(","),"yuyii")
+                            setLonForm(coordsFromForm.split(",")[0])
+                             setLatForm(coordsFromForm.split(",")[1])
+                           console.log("LonForm Latfor -home",lonForm,latForm);
+          //sendFormToMap();
+          setSendToMapButOn(true)
+         formToMap(latForm,lonForm)
+       
+         }
+         
+         
+         //fetchFormOnmap();
+                
+     const handleClickRemFromMap =() =>{
+    // localStorage.removeItem('coordsFromForm');
+     //refreshPage();
+     setLonForm(lon);
+     setLatForm(lat);
+     setSendToMapButOn(true);
+     }    
 
 return(
 <div>
@@ -143,12 +179,32 @@ return(
   //handleClickWatchPosition()
   }}>Start watching of your position</button></span>
   
-   <div>
- <br></br>
- <br></br>
-   <CoordsForm/>
-   <br></br><br></br>
- </div>
+  <div>
+  <br></br>
+      <form className="cords-form" onSubmit={handleSubmitForm}>
+        
+        <label>
+          <div>Target geocoordinates</div>
+          <br></br>
+          <input type="text" 
+               onChange={(e) =>setCoordsFromForm(e.target.value)}
+              value={coordsFromForm}   
+          />
+        </label>
+       <button>Send to the map</button>
+       <button onClick={handleClickRemFromMap}>Remove from the map</button>
+      </form>
+  </div>
+   <p>{coordsFromForm}</p>
+   
+      <span className="bigger-size-letter">Target location </span>
+      <span><img src={blueIcon} alt="Current position" height={25} width={15} /></span>
+   
+     {/*   <p><button onClick={handleResetFormForm}>Clear target location</button></p> */}
+        
+ 
+ 
+ 
 
 <h2>Adres twojej pozycji</h2>
 
