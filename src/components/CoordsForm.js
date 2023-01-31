@@ -10,8 +10,9 @@ import blueIcon from '../images/blueIcon.png'
 export default function CordsForm() {
 const [coordsFromForm,setCoordsFromForm] = useState('')
 
+
 const {refreshPage} = useRefresh()
-const {sendFormToMap} = useMap()
+const {sendFormToMap,setSendToMapButOn} = useMap()
 
 //console.log("DATYA",data)
 
@@ -19,7 +20,7 @@ const {sendFormToMap} = useMap()
           e.preventDefault();
           setCoordsFromForm(coordsFromForm);
           sendFormToMap();
-          
+          setSendToMapButOn(true)
          
          if(coordsFromForm){
              localStorage.setItem('coordsFromForm', JSON.stringify(coordsFromForm))      

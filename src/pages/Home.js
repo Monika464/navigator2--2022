@@ -139,7 +139,7 @@ return(
   <span> <button onClick={()=>{
   setWachingPosButOn(true)
   fetchPosition();
-
+  fetchFromStorage();
   //handleClickWatchPosition()
   }}>Start watching of your position</button></span>
   
