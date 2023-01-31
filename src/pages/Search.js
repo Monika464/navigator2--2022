@@ -1,4 +1,5 @@
 //import './Search.css'
+
 import {useState, useEffect,useCallback} from 'react'
 import {CopyToClipboard} from 'react-copy-to-clipboard'
 import useRefresh  from '../hooks/useRefresh'
@@ -198,8 +199,8 @@ return(
 
 <div>
 
-  <div className ="search-list">
-  
+  <div className ="search-list-nav">
+
  
   <div>
   

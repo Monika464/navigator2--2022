@@ -1,3 +1,4 @@
+import './TripList.css'
 import {useState,useEffect,useCallback} from 'react'
 import useTrack from '../hooks/useTrack'
 import useFetch from '../hooks/useFetch'
@@ -165,9 +166,9 @@ if(sendToMapButOn){
     
 
 return(
-<div>
 
-{!wachingPosButOn && <div>Wlacz sledzenie</div>}
+ <div className ="search-list-nav">
+{!wachingPosButOn && <div>Turn on watching position</div>}
 
 {/*geocoords*/}
 {!isPending&&  <div>Latitude,Longitude {lon},{lat} <p>Accuracy {accure} meters</p></div>}
@@ -205,8 +206,8 @@ return(
               value={coordsFromForm}   
           />
         </label>
-       <button>Send to the map</button>
-       <button onClick={handleClickRemFromMap}>Remove from the map</button>
+       <button>Send to map</button>
+       <button onClick={handleClickRemFromMap}>Remove from map</button>
       </form>
   </div>
    <p>{coordsFromForm}</p>
@@ -238,20 +239,24 @@ return(
             <button onClick={()=>{handleClickLoadMapMarkers(item.id)}}>Load on map</button>*/}
       
   <div style={{display: storageButtonShow ? 'block' : 'none'}}>
-  
+ <ul>
       {fromStorage && fromStorage.map((item, index)=>(
-        <div key={item.id}>
+ 
+        <li key={item.id} >
          <h2>{index}</h2>
-         <h2>Longitude,Latitude{item.lon},{item.lat}, date{item.date} </h2>
+         <h2>Lon,Lat{item.lon},{item.lat}, date{item.date} </h2>
          <button onClick={(e)=>{handleClickLoadTargetMark(item)}}>Load on map</button>
          <button onClick={handleClickRemoveTargetMark}>Remove from map</button>
          {/*<button onClick={()=>{handleClickDel(event.id)}}>Delete form storaget</button>*/}
-        </div>
+        </li>
+      
       ))}
+  </ul>   
   </div> 
   
 
 </div>
+
 )
 
 

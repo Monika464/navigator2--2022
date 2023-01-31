@@ -119,7 +119,7 @@ setPlaces(null)
 return (
 
 
-  <div className ="search-list">
+  <div className ="search-list-nav">
   
   
     <div>
