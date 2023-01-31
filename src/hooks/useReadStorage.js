@@ -13,35 +13,17 @@ const fetchFromStorage = () =>{
 
                for (let i = 0; i < localStorage.length; i++) {
   			   const key = localStorage.key(i)
-    		 if(key === 'coordsFromForm'){
-               		        console.log('coordsFromForm')
-     			        let dataStor = JSON.parse(localStorage.getItem('coordsFromForm'))
-      				setCoordsFromForm(dataStor)
-      			
-                             console.log("coordsFor-useReadStorage",coordsFromForm.split(","),"yuyii")
-                            setLonForm(coordsFromForm.split(",")[0])
-                             setLatForm(coordsFromForm.split(",")[1])
-                           console.log("LonForm Latfor -useMap",lonForm,latForm);
-                    }	
+    	
                  if (key === 'currentCoordsStored'){
                                console.log('currentCoordsStored')
                                let dataStor = JSON.parse(localStorage.getItem('currentCoordsStored'))
    	                   setFromStorage(dataStor) 
-                               } 
+                  } 
+                  //console.log("key",key)
             } 
          }
          
-         /* if(coordsFromForm){
-  console.log("coordsFor-useMap",coordsFromForm.split(","),"yuyii")
-  setLonForm(coordsFromForm.split(",")[0])
-  setLatForm(coordsFromForm.split(",")[1])
-  } */
-  
-    console.log("LonForm Latfor Read-St",lonForm,latForm);
-         //useEffect(()=>{fetchFromStorage()},[])
-
- console.log("w storage -useStorage",fromStorage)
- }
+  }
 
 return {fetchFromStorage,fromStorage,lonForm,latForm}
 }

@@ -34,7 +34,7 @@ const {fromStorage,fetchFromStorage} = useReadStorage()
 
 //const{refreshPage} = useRefresh()
 
-console.log("cords z formularza",coordsFromForm);
+//console.log("cords z formularza",coordsFromForm);
 
  const handleSaveCoordToStorage=()=>{
 //tu cos przestawilam
@@ -76,7 +76,7 @@ if(sendToMapButOn){
  setUrlTarget (`https://eu1.locationiq.com/v1/reverse?key=${myMapApiKey}&lat=${latForm}&lon=${lonForm}         &format=json&addressdetails=1&showdistance=1`)
 }
 
-},[lat,lon,wachingPosButOn,loadMap])
+},[lat,lon,wachingPosButOn,loadMap,latForm,lonForm,sendToMapButOn])
 
 
 
@@ -152,10 +152,17 @@ if(sendToMapButOn){
      const handleClickRemFromMap =() =>{
     // localStorage.removeItem('coordsFromForm');
      //refreshPage();
+     setSendToMapButOn(false);
      setLonForm(lon);
      setLatForm(lat);
-     setSendToMapButOn(false);
-     }    
+     
+     }  
+     
+     const handleClickDel=()=>{
+   
+     }
+   
+    
 
 return(
 <div>
@@ -204,18 +211,19 @@ return(
   </div>
    <p>{coordsFromForm}</p>
    
+  {sendToMapButOn &&  <div>
       <span className="bigger-size-letter">Target location </span>
-      <span><img src={blueIcon} alt="Current position" height={25} width={15} /></span>
+      <span><img src={redIcon} alt="Current position" height={25} width={15} /></span>
     <span> {yourTargetLocation &&  <p>{yourTargetLocation.address.road},{yourTargetLocation.address.quarter},{yourTargetLocation.address.postcode},{yourTargetLocation.address.city},{yourTargetLocation.address.state},{yourTargetLocation.address.administrative},{yourTargetLocation.address.country_code} </p>}</span>
    
      {/*   <p><button onClick={handleResetFormForm}>Clear target location</button></p> */}
-        
+   </div>  }   
  
  
  
 
 <span className="bigger-size-letter">Your position address</span>
-     <span><img src={redIcon} alt="Target position" height={25} width={15} /></span>
+     <span><img src={blueIcon} alt="Target position" height={25} width={15} /></span>
 
  {yourLocation && <p>{yourLocation.address.road},{yourLocation.address.quarter},{yourLocation.address.postcode},{yourLocation.address.city},{yourLocation.address.state},{yourLocation.address.administrative},{yourLocation.address.country_code} </p>}
  
@@ -237,6 +245,7 @@ return(
          <h2>Longitude,Latitude{item.lon},{item.lat}, date{item.date} </h2>
          <button onClick={(e)=>{handleClickLoadTargetMark(item)}}>Load on map</button>
          <button onClick={handleClickRemoveTargetMark}>Remove from map</button>
+         {/*<button onClick={()=>{handleClickDel(event.id)}}>Delete form storaget</button>*/}
         </div>
       ))}
   </div> 
