@@ -8,6 +8,7 @@ import {CopyToClipboard} from 'react-copy-to-clipboard'
  
 import useRefresh  from '../hooks/useRefresh'
 import blueIcon from '../images/blueIcon.png'
+import redIcon from '../images/redIcon.png'
 //import {useReverseGeocoding} from './hooks/useReverseGeocoding' 
    
  //export default function Home({lat,lon,id}) {
@@ -18,14 +19,16 @@ const [copied, setCopied] = useState(false);
 const [storageButtonShow, setStorageButtonShow] = useState(false);
 const [currentCoords,setCurrentCoords] = useState([]);
 const [wachingPosButOn,setWachingPosButOn] = useState(false);
+const [sendToMapButOn, setSendToMapButOn] = useState(false);
 const [coordsFromForm,setCoordsFromForm] = useState('')
 const [url,setUrl] = useState(null)
+const [urlTarget,setUrlTarget]= useState(null)
 const[lonForm, setLonForm] = useState(null)
 const[latForm, setLatForm] = useState(null)
 
 //const {lat,lon,id,accure,handleButWatchPos} = useTrack()
 const {lat,lon,id,accure,fetchPosition} = useTrack()
-const {urlMarkMap,handleClickLoadTargetMark,handleClickRemoveTargetMark,loadMap,setSendToMapButOn,formToMap} = useMap()
+const {urlMarkMap,handleClickLoadTargetMark,handleClickRemoveTargetMark,loadMap,formToMap} = useMap()
 const {fromStorage,fetchFromStorage} = useReadStorage()
  const {refreshPage} = useRefresh()
 
@@ -50,6 +53,7 @@ localStorage.setItem('currentCoordsStored', JSON.stringify(currentCoords));
  
 const {data: yourLocation, error: adressError} = useFetch(url)
 //console.log(urlMarkMap)
+const {data: yourTargetLocation, error: targetAdressError} = useFetch(urlTarget)
 
 const myMapApiKey = "pk.4445013492f295d88e56ecea546a9304"; 
 
@@ -68,6 +72,9 @@ else {
 console.log("Włacz sledzenie")
 }
 
+if(sendToMapButOn){
+ setUrlTarget (`https://eu1.locationiq.com/v1/reverse?key=${myMapApiKey}&lat=${latForm}&lon=${lonForm}         &format=json&addressdetails=1&showdistance=1`)
+}
 
 },[lat,lon,wachingPosButOn,loadMap])
 
@@ -136,7 +143,7 @@ console.log("Włacz sledzenie")
           //sendFormToMap();
           setSendToMapButOn(true)
          formToMap(latForm,lonForm)
-       
+      
          }
          
          
@@ -147,7 +154,7 @@ console.log("Włacz sledzenie")
      //refreshPage();
      setLonForm(lon);
      setLatForm(lat);
-     setSendToMapButOn(true);
+     setSendToMapButOn(false);
      }    
 
 return(
@@ -199,6 +206,7 @@ return(
    
       <span className="bigger-size-letter">Target location </span>
       <span><img src={blueIcon} alt="Current position" height={25} width={15} /></span>
+    <span> {yourTargetLocation &&  <p>{yourTargetLocation.address.road},{yourTargetLocation.address.quarter},{yourTargetLocation.address.postcode},{yourTargetLocation.address.city},{yourTargetLocation.address.state},{yourTargetLocation.address.administrative},{yourTargetLocation.address.country_code} </p>}</span>
    
      {/*   <p><button onClick={handleResetFormForm}>Clear target location</button></p> */}
         
@@ -206,13 +214,14 @@ return(
  
  
 
-<h2>Adres twojej pozycji</h2>
+<span className="bigger-size-letter">Your position address</span>
+     <span><img src={redIcon} alt="Target position" height={25} width={15} /></span>
 
  {yourLocation && <p>{yourLocation.address.road},{yourLocation.address.quarter},{yourLocation.address.postcode},{yourLocation.address.city},{yourLocation.address.state},{yourLocation.address.administrative},{yourLocation.address.country_code} </p>}
  
- <img src= {urlMarkMap} alt="map"/>
+ {!isPending &&<img src= {urlMarkMap} alt="map"/>}
 
-{adressError && <p>adressError</p>}
+{adressError && <p>Could not fetch address</p>}
   <p><button onClick={handleClearStorage}>Clear Storage</button></p>  
 
 <button onClick={()=>{handleClickStorageBut()}}>Show/Hide Personal Storage</button>
