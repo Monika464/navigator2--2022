@@ -190,12 +190,13 @@ return(
   }}>Connect geolocation</button></span>}
   
   {wachingPosButOn  &&
-  <span><button onClick={handleClickStop}>Stop geolocation</button></span>}
+  <span><button onClick={handleClickStop}>Disconnect geolocation</button></span>}
 <br></br>
 {/*geocoords*/}
 <br></br>
 {!isPending&&  <div>Latitude,Longitude {lon},{lat} <p>Accuracy {accure} meters</p></div>}
 {isPending && wachingPosButOn && <p>Searching for GPS signal...</p>}
+ 
  <p>
         <CopyToClipboard
           onCopy={onCopy}
@@ -259,9 +260,8 @@ return(
  <ul>
       {fromStorage && fromStorage.map((item, index)=>(
  
-        <li key={item.id} >
-         <h2>{index}</h2>
-         <h2>Lon,Lat{item.lon},{item.lat}, date{item.date} </h2>
+        <li key={item.id} > 
+         <p>{index}-Lat,Lon{item.lon},{item.lat}, Date{item.date} </p>
          <button onClick={(e)=>{handleClickLoadTargetMark(item)}}>Load on map</button>
          <button onClick={handleClickRemoveTargetMark}>Remove from map</button>
          {/*<button onClick={()=>{handleClickDel(event.id)}}>Delete form storaget</button>*/}
