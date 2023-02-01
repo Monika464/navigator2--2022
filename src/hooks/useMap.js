@@ -19,16 +19,13 @@ const {lonForm,latForm} = useReadStorage()
    
 
     //fetchPosition() 
-console.log("z useMap dane lonFrSto" ,lonFrSto,latFrSto)
-console.log("z useMap dane z Forma" ,lonForm,latForm)
 
-console.log("z useMap dana z tracking" ,lat,lon)
 
 const myMapApiKey = "pk.4445013492f295d88e56ecea546a9304"; 
 
 useEffect(()=>{
 if(sendToMapButOn){
-console.log("z useMap dana z tracking sendToMapButOn" ,lat,lon)
+//console.log("z useMap dana z tracking sendToMapButOn" ,lat,lon)
 }
 
 
@@ -36,7 +33,7 @@ console.log("z useMap dana z tracking sendToMapButOn" ,lat,lon)
 
 const handleClickLoadTargetMark =(e)=>{
 
-  console.log(e.lat, e.lon)
+  //console.log(e.lat, e.lon)
   const newLat = e.lat;
   const newLon = e.lon;
   setLatFrSto(newLat)
@@ -85,6 +82,6 @@ const loadMap =(latx,lonx)=>{
 }
 
 
-return {urlMarkMap,handleClickLoadTargetMark,handleClickRemoveTargetMark,loadMap,setSendToMapButOn,formToMap}
+return {urlMarkMap,handleClickLoadTargetMark,handleClickRemoveTargetMark,loadMap,setSendToMapButOn,formToMap,lonFrSto,latFrSto}
 
 }

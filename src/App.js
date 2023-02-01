@@ -1,4 +1,4 @@
-import {BrowserRouter, Switch ,Route,Redirect} from 'react-router-dom'
+import {BrowserRouter, Switch ,Route,Redirect,NavLink} from 'react-router-dom'
 
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -17,7 +17,15 @@ function App() {
  
     
       <BrowserRouter>
-        <Navbar/> 
+          <nav className="navbar">
+                  <h1>Geolocator</h1>
+                   <div className="links">  
+                      <NavLink exact to="/">Navigator</NavLink>
+                      <NavLink exact to="/search">Search</NavLink>
+                      <NavLink exact to="/weather">Weather</NavLink> 
+                    </div> 
+                </nav> 
+      
          
         <Switch>
           <Route exact path="/">
@@ -31,6 +39,7 @@ function App() {
            </Route>                      
        </Switch>
       
+       <Footer/>
       </BrowserRouter>
       
     </div>

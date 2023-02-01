@@ -33,7 +33,7 @@ const fetchPosition = () =>{
                   setLon(crd.longitude); 
 		  setLat(crd.latitude); 
 		  setAccure(Math.round(crd.accuracy));
-		  console.log("dokladnosc",Math.round(crd.accuracy))	                     
+		 // console.log("dokladnosc",Math.round(crd.accuracy))	                     
                   setId(id);
                  //setIsPending(false)
                   // localStorage.setItem('LonWatch', JSON.stringify(crd.longitude));
@@ -41,16 +41,16 @@ const fetchPosition = () =>{
                  //setCrd(pos.coords)
                   }
                   
-                  console.log("id",id)
+                 // console.log("id",id)
                   
              function error(err){
                   console.error(`ERROR(${err.code}): ${err.message}`);
                   
                   
-              setTimeout(function () {
-             navigator.geolocation.clearWatch(id)
-             console.log("Watching stopped due to exceedet time. Satrt again");
-             }, 100000); }
+             
+              }
+              
+            
          }
        
        // Stop watching after 5 seconds

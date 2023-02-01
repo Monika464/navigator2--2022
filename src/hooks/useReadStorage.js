@@ -15,7 +15,7 @@ const fetchFromStorage = () =>{
   			   const key = localStorage.key(i)
     	
                  if (key === 'currentCoordsStored'){
-                               console.log('currentCoordsStored')
+                             //  console.log('currentCoordsStored')
                                let dataStor = JSON.parse(localStorage.getItem('currentCoordsStored'))
    	                   setFromStorage(dataStor) 
                   } 

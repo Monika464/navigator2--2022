@@ -29,7 +29,7 @@ const[latForm, setLatForm] = useState(null)
 
 //const {lat,lon,id,accure,handleButWatchPos} = useTrack()
 const {lat,lon,id,accure,fetchPosition} = useTrack()
-const {urlMarkMap,handleClickLoadTargetMark,handleClickRemoveTargetMark,loadMap,formToMap} = useMap()
+const {urlMarkMap,handleClickLoadTargetMark,handleClickRemoveTargetMark,loadMap,formToMap,lonFrSto,latFrSto} = useMap()
 const {fromStorage,fetchFromStorage} = useReadStorage()
  const {refreshPage} = useRefresh()
 
@@ -48,7 +48,7 @@ localStorage.setItem('currentCoordsStored', JSON.stringify(currentCoords));
  //console.log(e.lon,e.lat)
   //}
   
- console.log("currentCoords",currentCoords)
+
  
   //console.log("coords",coords)
  
@@ -76,6 +76,10 @@ console.log("Włacz sledzenie")
 if(sendToMapButOn){
  setUrlTarget (`https://eu1.locationiq.com/v1/reverse?key=${myMapApiKey}&lat=${latForm}&lon=${lonForm}         &format=json&addressdetails=1&showdistance=1`)
 }
+if((lonFrSto && latFrSto)!== 0)
+{
+ setUrlTarget (`https://eu1.locationiq.com/v1/reverse?key=${myMapApiKey}&lat=${latFrSto}&lon=${lonFrSto}         &format=json&addressdetails=1&showdistance=1`)
+}
 
 },[lat,lon,wachingPosButOn,loadMap,latForm,lonForm,sendToMapButOn])
 
@@ -101,6 +105,7 @@ if(sendToMapButOn){
  const handleClickStop=()=>{
  navigator.geolocation.clearWatch(id);
  console.log("watching position stopped")
+ setWachingPosButOn(false)
  }
  
  const handleClearStorage=()=>{
@@ -163,16 +168,34 @@ if(sendToMapButOn){
    
      }
    
-    
+       setTimeout(function () {
+             navigator.geolocation.clearWatch(id)
+             console.log("Watching stopped due to exceedet time. Start again");
+             setWachingPosButOn(false)
+             }, 100000);
 
 return(
 
  <div className ="search-list-nav">
-{!wachingPosButOn && <div>Turn on watching position</div>}
+{!wachingPosButOn && <div>Connect geolocation and enable localisation on your device</div>}
 
+<br></br>
+{/*sledzenie*/}
+{!wachingPosButOn  &&
+  <span> <button onClick={()=>{
+  setWachingPosButOn(true)
+  fetchPosition();
+  fetchFromStorage();
+  //handleClickWatchPosition()
+  }}>Connect geolocation</button></span>}
+  
+  {wachingPosButOn  &&
+  <span><button onClick={handleClickStop}>Stop geolocation</button></span>}
+<br></br>
 {/*geocoords*/}
+<br></br>
 {!isPending&&  <div>Latitude,Longitude {lon},{lat} <p>Accuracy {accure} meters</p></div>}
-{isPending && wachingPosButOn && <p>Loading...</p>}
+{isPending && wachingPosButOn && <p>Searching for GPS signal...</p>}
  <p>
         <CopyToClipboard
           onCopy={onCopy}
@@ -184,22 +207,16 @@ return(
         {copied ? <span style={{color: 'red'}}>Copied.</span> : null}
       </p>
   <p><button onClick={handleSaveCoordToStorage}>Save current coordinates to personal storage</button></p>     
-<button onClick={handleClickStop}>Zakoncz sledzenie</button> 
 
-{/*sledzenie*/}
-  <span> <button onClick={()=>{
-  setWachingPosButOn(true)
-  fetchPosition();
-  fetchFromStorage();
-  //handleClickWatchPosition()
-  }}>Start watching of your position</button></span>
+
+
   
   <div>
   <br></br>
       <form className="cords-form" onSubmit={handleSubmitForm}>
         
         <label>
-          <div>Target geocoordinates</div>
+          <div>Target location geocoordinates (Lat,Lon)</div>
           <br></br>
           <input type="text" 
                onChange={(e) =>setCoordsFromForm(e.target.value)}
