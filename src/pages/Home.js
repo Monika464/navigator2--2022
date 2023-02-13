@@ -3,8 +3,9 @@ import {useState,useEffect,useCallback} from 'react'
 import useTrack from '../hooks/useTrack'
 import useFetch from '../hooks/useFetch'
 import useMap from '../hooks/useMap'
+
 import useReadStorage from '../hooks/useReadStorage'
-//import CoordsForm from '../components/CoordsForm';
+
 import {CopyToClipboard} from 'react-copy-to-clipboard'
  
 import useRefresh  from '../hooks/useRefresh'
@@ -15,6 +16,8 @@ import redIcon from '../images/redIcon.png'
  //export default function Home({lat,lon,id}) {
 export default function Home() {
 //localStorage.clear();
+
+//czemu undefined
 
 const [copied, setCopied] = useState(false);
 const [storageButtonShow, setStorageButtonShow] = useState(false);
@@ -29,7 +32,7 @@ const[latForm, setLatForm] = useState(null)
 
 //const {lat,lon,id,accure,handleButWatchPos} = useTrack()
 const {lat,lon,id,accure,fetchPosition} = useTrack()
-const {urlMarkMap,handleClickLoadTargetMark,handleClickRemoveTargetMark,loadMap,formToMap,lonFrSto,latFrSto} = useMap()
+const {urlMarkMap,handleClickLoadTargetMark,handleClickRemoveTargetMark,loadMap,formToMap,lonFrSto,latFrSto,sendToMapButStorOn} = useMap()
 const {fromStorage,fetchFromStorage} = useReadStorage()
  const {refreshPage} = useRefresh()
 
@@ -137,7 +140,7 @@ if((lonFrSto && latFrSto)!== 0)
   
 
 
-//console.log("DATYA",data)
+//formularz targetloction coords connected wirh send
 
      const handleSubmitForm =(e) =>{
           e.preventDefault();
@@ -177,7 +180,7 @@ if((lonFrSto && latFrSto)!== 0)
 return(
 
  <div className ="search-list-nav">
-{!wachingPosButOn && <div>Connect geolocation and enable localisation on your device</div>}
+{!wachingPosButOn && <div style={{color: "#f1356d", fontWeight:"900"}}>Connect geolocation and enable localisation on your device</div>}
 
 <br></br>
 {/*sledzenie*/}
@@ -230,7 +233,7 @@ return(
   </div>
    <p>{coordsFromForm}</p>
    
-  {sendToMapButOn &&  <div>
+  { (sendToMapButOn || sendToMapButStorOn)   && <div>
       <span className="bigger-size-letter">Target location </span>
       <span><img src={redIcon} alt="Current position" height={25} width={15} /></span>
     <span> {yourTargetLocation &&  <p>{yourTargetLocation.address.road},{yourTargetLocation.address.quarter},{yourTargetLocation.address.postcode},{yourTargetLocation.address.city},{yourTargetLocation.address.state},{yourTargetLocation.address.administrative},{yourTargetLocation.address.country_code} </p>}</span>
@@ -245,6 +248,7 @@ return(
      <span><img src={blueIcon} alt="Target position" height={25} width={15} /></span>
 
  {yourLocation && <p>{yourLocation.address.road},{yourLocation.address.quarter},{yourLocation.address.postcode},{yourLocation.address.city},{yourLocation.address.state},{yourLocation.address.administrative},{yourLocation.address.country_code} </p>}
+
  
  {!isPending &&<img src= {urlMarkMap} alt="map"/>}
 

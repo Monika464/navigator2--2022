@@ -10,7 +10,7 @@ const [latFrSto,setLatFrSto] = useState(null)
 //const[lonForm, setLonForm] = useState(null)
 //const[latForm, setLatForm] = useState(null)
 //const [coordsFromForm,setCoordsFromForm] = useState("")
-const [sendToMapButOn,setSendToMapButOn] = useState(false)
+const [sendToMapButStorOn,setSendToMapButStorOn] = useState(false)
 
 const {lonForm,latForm} = useReadStorage()
 
@@ -23,13 +23,13 @@ const {lonForm,latForm} = useReadStorage()
 
 const myMapApiKey = "pk.4445013492f295d88e56ecea546a9304"; 
 
+/*
 useEffect(()=>{
 if(sendToMapButOn){
 //console.log("z useMap dana z tracking sendToMapButOn" ,lat,lon)
 }
-
-
 },[sendToMapButOn,lat,lon])
+*/
 
 const handleClickLoadTargetMark =(e)=>{
 
@@ -39,13 +39,14 @@ const handleClickLoadTargetMark =(e)=>{
   setLatFrSto(newLat)
   setLonFrSto(newLon)
   console.log("ustawione",latFrSto, lonFrSto)
+  setSendToMapButStorOn(true)
  }
 
 const handleClickRemoveTargetMark =()=>{
    
     setLatFrSto(lat)
     setLonFrSto(lon)
-    
+    setSendToMapButStorOn(false)
 }
 /*
 const fetchFormOnmap=()=>{
@@ -82,6 +83,6 @@ const loadMap =(latx,lonx)=>{
 }
 
 
-return {urlMarkMap,handleClickLoadTargetMark,handleClickRemoveTargetMark,loadMap,setSendToMapButOn,formToMap,lonFrSto,latFrSto}
+return {urlMarkMap,handleClickLoadTargetMark,handleClickRemoveTargetMark,loadMap,sendToMapButStorOn,formToMap,lonFrSto,latFrSto}
 
 }
