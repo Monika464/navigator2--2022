@@ -123,10 +123,11 @@ return (
   
   
     <div>
- 	<h2>Paste geocoordinates (Lat,Lon) to check 3 days weather forecast</h2>
+ 	<h2>Check weather by geocoordinates</h2>
       	<form className="cords-form" onSubmit={handleSubmitCordsForm}>
         	 <label>
-          	      <div>Target geocoordinates </div>
+          	      <div>Paste geocoordinates to check 3 days wether forecast</div>
+          	      <br/>
          	       <input type="text" 
                        onChange={(e) =>setCoordsFromForm(e.target.value)}
             	       value={coordsFromForm}

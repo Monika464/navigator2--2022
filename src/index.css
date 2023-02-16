@@ -139,6 +139,7 @@ color: #E4E4E4;
 .dark label,
 .dark div,
 .dark span,
+.dark h2,
 .dark p {
   color: #e4e4e4;
 }
