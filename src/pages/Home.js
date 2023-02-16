@@ -3,7 +3,7 @@ import {useState,useEffect,useCallback} from 'react'
 import useTrack from '../hooks/useTrack'
 import useFetch from '../hooks/useFetch'
 import useMap from '../hooks/useMap'
-
+import { useTheme } from '../hooks/useTheme'
 import useReadStorage from '../hooks/useReadStorage'
 
 import {CopyToClipboard} from 'react-copy-to-clipboard'
@@ -15,9 +15,9 @@ import redIcon from '../images/redIcon.png'
    
  //export default function Home({lat,lon,id}) {
 export default function Home() {
-//localStorage.clear();
 
-//czemu undefined
+
+  const {mode} =useTheme()
 
 const [copied, setCopied] = useState(false);
 const [storageButtonShow, setStorageButtonShow] = useState(false);
@@ -179,7 +179,7 @@ if((lonFrSto && latFrSto)!== 0)
 
 return(
 
- <div className ="search-list-nav">
+ <div className ={`search-list-nav ${mode}`}>
 {!wachingPosButOn && <div style={{color: "#f1356d", fontWeight:"900"}}>Connect geolocation and enable localisation on your device</div>}
 
 <br></br>
@@ -192,8 +192,7 @@ return(
   //handleClickWatchPosition()
   }}>Connect geolocation</button></span>}
   
-  {wachingPosButOn  &&
-  <span><button onClick={handleClickStop}>Disconnect geolocation</button></span>}
+  {wachingPosButOn  &&<span><button onClick={handleClickStop}>Disconnect geolocation</button></span>}
 <br></br>
 {/*geocoords*/}
 <br></br>
@@ -234,7 +233,7 @@ return(
    <p>{coordsFromForm}</p>
    
   { (sendToMapButOn || sendToMapButStorOn)   && <div>
-      <span className="bigger-size-letter">Target location </span>
+      <span className={`bigger-size-letter ${mode}`}>Target location </span>
       <span><img src={redIcon} alt="Current position" height={25} width={15} /></span>
     <span> {yourTargetLocation &&  <p>{yourTargetLocation.address.road},{yourTargetLocation.address.quarter},{yourTargetLocation.address.postcode},{yourTargetLocation.address.city},{yourTargetLocation.address.state},{yourTargetLocation.address.administrative},{yourTargetLocation.address.country_code} </p>}</span>
    
@@ -244,7 +243,7 @@ return(
  
  
 
-<span className="bigger-size-letter">Your position address</span>
+<span className={`bigger-size-letter ${mode}`}>Your position address</span>
      <span><img src={blueIcon} alt="Target position" height={25} width={15} /></span>
 
  {yourLocation && <p>{yourLocation.address.road},{yourLocation.address.quarter},{yourLocation.address.postcode},{yourLocation.address.city},{yourLocation.address.state},{yourLocation.address.administrative},{yourLocation.address.country_code} </p>}

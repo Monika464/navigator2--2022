@@ -1,8 +1,10 @@
 //import {Link } from 'react-router-dom';
-const Navbar = () =>{
+import { useTheme } from '../hooks/useTheme'
 
+const Navbar = () =>{
+const {mode} =useTheme()
    return (
-        <nav className="navbar">
+        <nav className={`navbar ${mode}`}>
              <h1>Geolocator</h1>
             <div className="links">
               

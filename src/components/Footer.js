@@ -1,12 +1,14 @@
-//import {Link } from 'react-router-dom';
+import { useTheme } from '../hooks/useTheme'
+
 const Footer = () =>{
+const {mode} =useTheme()
 
    return (
    
     
-        <nav className="footer">
-            <div className ="search-list-nav">
-            <div className="links">
+        <nav className={`footer ${mode}`}>
+            <div className ={`search-list-nav ${mode}`}>
+            <div className={`links ${mode}`}>
               
                  <span>  Search & Weather powered by <a href="https://locationiq.com/?ref=link-back"> LocationIQ.com</a> </span> 
              

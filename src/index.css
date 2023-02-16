@@ -100,3 +100,46 @@ input {
 .bigger-size-letter {
 font-weight: bold;
 }
+
+/* dark mode */
+ .dark{
+color: #999;
+}
+.dark .navbar a {
+  color: #fff;
+}
+
+.dark.navbar.links {
+color: 'white'
+}
+
+.dark button {
+  background: #555555;
+  color: #E4E4E4;
+}
+
+.dark.navbar a:hover {
+  color: #f1356d;
+}
+
+.dark.navbar a.active {
+color: #E4E4E4;
+background: #778899;
+}
+
+.dark.footer a,
+.dark.footer span {
+color: #E4E4E4;
+}
+
+
+.dark .page-title,
+.dark .loading,
+.dark .error,
+.dark label,
+.dark div,
+.dark span,
+.dark p {
+  color: #e4e4e4;
+}
+
