@@ -123,7 +123,7 @@ return (
   
   
     <div>
- 	<h2>Check weather by geocoordinates</h2>
+ 	<h2>Paste geocoordinates (Lat,Lon) to check 3 days weather forecast</h2>
       	<form className="cords-form" onSubmit={handleSubmitCordsForm}>
         	 <label>
           	      <div>Target geocoordinates </div>

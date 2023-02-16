@@ -38,7 +38,7 @@ const handleClickLoadTargetMark =(e)=>{
   const newLon = e.lon;
   setLatFrSto(newLat)
   setLonFrSto(newLon)
-  console.log("ustawione",latFrSto, lonFrSto)
+
   setSendToMapButStorOn(true)
  }
 

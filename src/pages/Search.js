@@ -50,7 +50,7 @@ lonNearby = geoloTerm.split(",")[0];
 latNearby = geoloTerm.split(",")[1].trim();
 setLatNearby(latNearby)
 setLonNearby(lonNearby)
-console.log("tu",latNearby,lonNearby)
+
 }
 
 useEffect(() => {
@@ -146,7 +146,7 @@ const handleSubmitSearchNearbyForm =(e)=>{
 	
 	   //setGeoloTerm(geoloTerm)
 	  //setLatNearby()
-	  console.log("geoloterm1",geoloTerm)
+	
   odzyskGeocord()
 	const url =`https://eu1.locationiq.com/v1/nearby?key=${myMapApiKey}&lat=${latNearby}&lon=${lonNearby}&tag=${tag}&radius=${radius}&format=json&limit=10&normalizeaddress=1` 
 	//console.log("przed zamiana",url)
@@ -223,7 +223,9 @@ return(
   	  		<select onChange={(e)=>{setCountry(e.target.value)}}>
  			 <option value="pl">Poland</option>
   			<option value="gb">UK</option>
-  			<option value="ge">Germany</option>
+  			<option value="cz">Czech Republic</option>
+  			<option value="sk">Slovakia</option>
+  			<option value="de">Germany</option>
   			</select>
   	 	</label> 		 
   		 <div>
@@ -283,6 +285,7 @@ return(
   		<div>Radius</div>
   	  	<select onChange={(e)=>{setRadius(e.target.value)}}>
  		 <option value="100">100m</option>
+ 		  <option value="500">500m</option>
   		<option value="1000">1km</option>
   		<option value="5000">5km</option>
   		<option value="10000">10km</option>

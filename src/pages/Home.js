@@ -29,6 +29,7 @@ const [url,setUrl] = useState(null)
 const [urlTarget,setUrlTarget]= useState(null)
 const[lonForm, setLonForm] = useState(null)
 const[latForm, setLatForm] = useState(null)
+const [exceededTime,setExceededTime] = useState(false)
 
 //const {lat,lon,id,accure,handleButWatchPos} = useTrack()
 const {lat,lon,id,accure,fetchPosition} = useTrack()
@@ -84,7 +85,7 @@ if((lonFrSto && latFrSto)!== 0)
  setUrlTarget (`https://eu1.locationiq.com/v1/reverse?key=${myMapApiKey}&lat=${latFrSto}&lon=${lonFrSto}         &format=json&addressdetails=1&showdistance=1`)
 }
 
-},[lat,lon,wachingPosButOn,loadMap,latForm,lonForm,sendToMapButOn])
+},[lat,lon,wachingPosButOn,loadMap,latForm,lonForm,sendToMapButOn,latFrSto,lonFrSto])
 
 
 
@@ -144,8 +145,8 @@ if((lonFrSto && latFrSto)!== 0)
 
      const handleSubmitForm =(e) =>{
           e.preventDefault();
-         // setCoordsFromForm(coordsFromForm);
-           console.log("coordsFor-hoe",coordsFromForm.split(","),"yuyii")
+      
+
                             setLonForm(coordsFromForm.split(",")[0])
                              setLatForm(coordsFromForm.split(",")[1])
                            console.log("LonForm Latfor -home",lonForm,latForm);
@@ -173,6 +174,7 @@ if((lonFrSto && latFrSto)!== 0)
    
        setTimeout(function () {
              navigator.geolocation.clearWatch(id)
+             setExceededTime(true)
              console.log("Watching stopped due to exceedet time. Start again");
              setWachingPosButOn(false)
              }, 100000);
@@ -181,7 +183,8 @@ return(
 
  <div className ={`search-list-nav ${mode}`}>
 {!wachingPosButOn && <div style={{color: "#f1356d", fontWeight:"900"}}>Connect geolocation and enable localisation on your device</div>}
-
+<br/>
+{exceededTime && !wachingPosButOn && <div style={{color: "#f1356d", fontWeight:"900"}}>Watching stopped due to exceedet time. Start again</div>}
 <br></br>
 {/*sledzenie*/}
 {!wachingPosButOn  &&
@@ -226,8 +229,8 @@ return(
               value={coordsFromForm}   
           />
         </label>
-       <button>Send to map</button>
-       <button onClick={handleClickRemFromMap}>Remove from map</button>
+       <button>Send to the map</button>
+       <button onClick={handleClickRemFromMap}>Remove from the map</button>
       </form>
   </div>
    <p>{coordsFromForm}</p>
@@ -265,8 +268,8 @@ return(
  
         <li key={item.id} > 
          <p>{index}-Lat,Lon{item.lon},{item.lat}, Date{item.date} </p>
-         <button onClick={(e)=>{handleClickLoadTargetMark(item)}}>Load on map</button>
-         <button onClick={handleClickRemoveTargetMark}>Remove from map</button>
+         <button onClick={(e)=>{handleClickLoadTargetMark(item)}}>Load on the map</button>
+         <button onClick={handleClickRemoveTargetMark}>Remove from the map</button>
          {/*<button onClick={()=>{handleClickDel(event.id)}}>Delete form storaget</button>*/}
         </li>
       
