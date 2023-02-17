@@ -2,7 +2,7 @@
 
 /* base styles */
 * {
-  margin: 0;
+  margin: 10;
   font-family: "Quicksand";
   color: #333;
 }
@@ -67,8 +67,10 @@ input {
   padding: 10px;
   font-size: 16px;
   flex-grow: 1;
+   max-width: 480px;
+   max-width: 480px;
 }
-.cords-form,
+.cords-form.label,
 .search-list-nav {
   max-width: 480px;
   margin: 30px auto;
