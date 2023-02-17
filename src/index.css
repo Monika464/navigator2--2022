@@ -2,7 +2,7 @@
 
 /* base styles */
 * {
-  margin: 10;
+  margin: 0;
   font-family: "Quicksand";
   color: #333;
 }
@@ -14,6 +14,7 @@
   max-width: 600px;
   margin: 0 auto;
   border-bottom: 1px solid #f2f2f2;
+  
 }
 
 .navbar h1 {
@@ -67,9 +68,9 @@ input {
   font-size: 16px;
   flex-grow: 1;
 }
-
+.cords-form,
 .search-list-nav {
-  width: 480px;
+  max-width: 480px;
   margin: 30px auto;
 }
 .search-list-nav ol {
@@ -101,9 +102,12 @@ font-weight: bold;
 }
 
 /* dark mode */
+
  .dark{
 color: #999;
+
 }
+
 .dark .navbar a {
   color: #fff;
 }
