@@ -1,70 +1,55 @@
-# Getting Started with Create React App
+App  on the serwer:
+https://navigator.ovh/
+Manual
+Navigator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+To see your position geocoordinates, address and location on a map ress button 'Connect geolocation'
+(you can disconnect manualy (button 'Disconnect geolocation')
+or after 1,5 minutes It will disconnect automatically.
 
-In the project directory, you can run:
 
-### `npm start`
+You should see your position (blue marker) on the map
+and see the address of your current location
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+To copy coordinates to copy to clipboard press button 'Copy coordinates of your current position'
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To save your coordinates to your browser storage press button 'Save your coordinates to personal storage'.
+To see content of the storage press button: 'Show/hide personal storage'
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+To  see on the map position from your storage in relation to your current position (red marker)
+press button 'Send to map'
+To remove this from the map press button 'Remove from map'
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+If you wish to check your current position in ralation to any other geocordinates,
+paste it (format: latitude,longitute) to the form labeled: 'Target location geocoordinates (Lat,Lon)'
+and press the button 'Send to map'. To remove press 'Remove from map'
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+To clear whole storage press button 'Clear storage'
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Search
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+To find a place type the name of the place in a form labeled 'Place'
+(for example: name of building, street,city)
+Press button 'Send'
+Yo copyy coordinates of the chosen position press button:
+'Copy coordinates of this position'
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+To check services around this location
+paste copied cooordinates in the form labeled 'Geocoordinates'
+choose radius and type of the object (from the drop-down list)
+and press 'Send'
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Weather
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The check the weather paste copied to clipboard geoocordinates ti the form labeled 'Target geocoordinates'
+Press 'Send' to see the waether and 'Clear' to remove
