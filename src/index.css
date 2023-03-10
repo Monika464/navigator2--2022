@@ -2,7 +2,7 @@
 
 /* base styles */
 * {
-  margin: 0;
+  margin: 10;
   font-family: "Quicksand";
   color: #333;
 }
@@ -15,6 +15,7 @@
   margin: 0 auto;
   border-bottom: 1px solid #f2f2f2;
   
+  
 }
 
 .navbar h1 {
@@ -22,13 +23,15 @@
 }
 
 .navbar .links {
-  margin-left: auto;
+  justify-content: space-between;
+  overflow-x: auto;
 }
 
 .navbar a {
   margin-left: 16px;
   text-decoration: none;
   padding: 6px;
+  display: inline-block
 }
 
 .navbar a:hover {
@@ -101,6 +104,9 @@ input {
 font-weight: bold;
 }
 
+img {
+/*max-width: 360px;*/
+}
 /* dark mode */
 
  .dark{
