@@ -14,9 +14,19 @@
   max-width: 600px;
   margin: 0 auto;
   border-bottom: 1px solid #f2f2f2;
-  
-  
+
 }
+  .mode-toggle {
+    /* margin-right: auto; */
+    margin-left: 10%;
+  }
+  .mode-toggle img {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+  }
+  
+
 
 .navbar h1 {
   color: #f1356d;
