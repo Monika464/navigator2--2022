@@ -60,7 +60,7 @@ const {data: yourLocation, error: adressError} = useFetch(url)
 //console.log(urlMarkMap)
 const {data: yourTargetLocation, error: targetAdressError} = useFetch(urlTarget)
 
-const myMapApiKey = "pk.4445013492f295d88e56ecea546a9304"; 
+const myMapApiKey = "..."; 
 
 
 useEffect(()=>{
