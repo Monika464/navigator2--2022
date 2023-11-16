@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 App  on the serwer:
 https://navigator.ovh/
 Manual
@@ -53,3 +54,6 @@ Weather
 
 The check the weather paste copied to clipboard geoocordinates ti the form labeled 'Target geocoordinates'
 Press 'Send' to see the waether and 'Clear' to remove
+=======
+# navigator2--2022
+>>>>>>> 6f90f770d744c9810bb64aafdea59d2d179075bb
