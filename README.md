@@ -1,14 +1,13 @@
-# Club Register App
+# My Navigator
 
-## Overview
+**My Navigator** is a web application that allows users to check their current location, search for nearby places, display them on a map, and view a three-day weather forecast.
 
-This app prototype is designed for managing sport events designed for martial arts competitions and includes features such as:
+## Features
 
-- accounts for admin club and user
-- creating, aditing users by clubs
-- entering competitions
-- creating announcement,collecting competitions entries
-- selecting and printing competition members and clubs
+- **Check current location**: Users can view their current position on the map.
+- **Search for nearby places**: Search for points of interest (e.g., restaurants, shops, etc.) in the vicinity.
+- **Display map**: View nearby places on an interactive map.
+- **Weather forecast**: Get a three-day weather forecast for a selected location.
 
 ## Preview
 
@@ -48,25 +47,23 @@ npm install
 npm run dev
 ```
 
-## Prerequisities
-
-### Wymagania wstępne
+### Prerequisities
 
 - Node.js >= 14.0.0.
 - npm or yarn package manager
 
 ### Struktura projektu
 
-    src/: Główne pliki aplikacji.
-       components/: Komponenty React używane w aplikacji.
-       services/: Funkcje do komunikacji z API.
-       styles/: Pliki CSS.
-    public/: Pliki statyczne.
-    package.json: Zdefiniowane zależności i skrypty.
+    src/: Main application files
+       components/:  React components used in the app
+       services/: Functions for API communication
+       styles/: CSS files
+    public/:  Static files
+    package.json: Contains dependencies and scripts
 
 ### API
 
-Aplikacja korzysta z zewnętrznych API do uzyskiwania danych o lokalizacji, wyszukiwaniu obiektów i prognoz pogody
+The app uses external APIs to fetch location, nearby places, and weather data.
 
 ## Scripts
 
