@@ -1,59 +1,86 @@
-<<<<<<< HEAD
-App  on the serwer:
-https://navigator.ovh/
-Manual
-Navigator
+# Club Register App
 
+## Overview
 
-To see your position geocoordinates, address and location on a map ress button 'Connect geolocation'
-(you can disconnect manualy (button 'Disconnect geolocation')
-or after 1,5 minutes It will disconnect automatically.
+This app prototype is designed for managing sport events designed for martial arts competitions and includes features such as:
 
+- accounts for admin club and user
+- creating, aditing users by clubs
+- entering competitions
+- creating announcement,collecting competitions entries
+- selecting and printing competition members and clubs
 
-You should see your position (blue marker) on the map
-and see the address of your current location
+## Preview
 
+You can test the app at the following link:
 
-To copy coordinates to copy to clipboard press button 'Copy coordinates of your current position'
+- **Preview:** [Navigator](https://navigator.ovh/)
 
+## Video Demonstration
 
-To save your coordinates to your browser storage press button 'Save your coordinates to personal storage'.
-To see content of the storage press button: 'Show/hide personal storage'
+[![Obrazek](https://firebasestorage.googleapis.com/v0/b/my-dojo-web.appspot.com/o/git-pictures%2FNavigator.png?alt=media&token=d76e5016-343b-4d8d-bad6-2805e37945df)](https://vimeo.com/1041583293?share=copy#t=0)
 
+## Local Setup
 
-To  see on the map position from your storage in relation to your current position (red marker)
-press button 'Send to map'
-To remove this from the map press button 'Remove from map'
+To run this project locally, follow these steps:
 
+1.Clone the repository:
 
-If you wish to check your current position in ralation to any other geocordinates,
-paste it (format: latitude,longitute) to the form labeled: 'Target location geocoordinates (Lat,Lon)'
-and press the button 'Send to map'. To remove press 'Remove from map'
+```
+git clone https://github.com/Monika464/navigator2--2022
+```
 
+2.Enter folder
 
-To clear whole storage press button 'Clear storage'
+```
+cd navigator2--2022
+```
 
+2.Install dependencies:
 
-Search
+```
+npm install
+```
 
+3.Start the development server:
 
-To find a place type the name of the place in a form labeled 'Place'
-(for example: name of building, street,city)
-Press button 'Send'
-Yo copyy coordinates of the chosen position press button:
-'Copy coordinates of this position'
+```
+npm run dev
+```
 
+## Prerequisities
 
-To check services around this location
-paste copied cooordinates in the form labeled 'Geocoordinates'
-choose radius and type of the object (from the drop-down list)
-and press 'Send'
+### Wymagania wstępne
 
+- Node.js >= 14.0.0.
+- npm or yarn package manager
 
-Weather
+### Struktura projektu
 
-The check the weather paste copied to clipboard geoocordinates ti the form labeled 'Target geocoordinates'
-Press 'Send' to see the waether and 'Clear' to remove
-=======
-# navigator2--2022
->>>>>>> 6f90f770d744c9810bb64aafdea59d2d179075bb
+    src/: Główne pliki aplikacji.
+       components/: Komponenty React używane w aplikacji.
+       services/: Funkcje do komunikacji z API.
+       styles/: Pliki CSS.
+    public/: Pliki statyczne.
+    package.json: Zdefiniowane zależności i skrypty.
+
+### API
+
+Aplikacja korzysta z zewnętrznych API do uzyskiwania danych o lokalizacji, wyszukiwaniu obiektów i prognoz pogody
+
+## Scripts
+
+    - npm run start: Start the app in production mode.
+    - npm run dev: Start the app in development mode using nodemon.
+    - npm run test: Run the tests using Jest.
+
+## Technologies:
+
+| Tech                    | Use                                      |
+| ----------------------- | ---------------------------------------- |
+| React                   | A framework for building user interfaces |
+| REST API                | Used for backend communication           |
+| React Router DOM        | For route management in the application  |
+| React Copy to Clipboard | Enables copying data to the clipboard    |
+
+###### Club Register App © 2024 by MK is licensed under CC BY-NC-ND 4.0 -->
