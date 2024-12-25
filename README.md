@@ -80,4 +80,4 @@ The app uses external APIs to fetch location, nearby places, and weather data.
 | React Router DOM        | For route management in the application  |
 | React Copy to Clipboard | Enables copying data to the clipboard    |
 
-###### Club Register App © 2024 by MK is licensed under CC BY-NC-ND 4.0 -->
+###### Navigator © 2024 by MK
